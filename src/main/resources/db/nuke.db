@@ -1,0 +1,2 @@
+drop table participants cascade;
+drop table groups cascade;
