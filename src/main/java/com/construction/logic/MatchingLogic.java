@@ -57,6 +57,7 @@ public class MatchingLogic {
             addProposal(man, woman, proposals);
         }
 
+        System.out.println();
         menToWomenMatching.entrySet().forEach(entry -> {
             ParticipantDto man = participantMap.get(entry.getKey());
             ParticipantDto woman = participantMap.get(entry.getValue());

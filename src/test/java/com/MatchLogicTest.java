@@ -68,23 +68,23 @@ public class MatchLogicTest {
         }};
 
         man1.setPreferences(new ArrayList<ParticipantDto>(){{
-            add(woman1);
+            add(woman4);
             add(woman2);
             add(woman4);
-            add(woman3);
+            add(woman1);
         }});
 
         man2.setPreferences(new ArrayList<ParticipantDto>(){{
-            add(woman3);
+            add(woman1);
             add(woman2);
             add(woman4);
-            add(woman1);
+            add(woman3);
         }});
 
         man3.setPreferences(new ArrayList<ParticipantDto>(){{
             add(woman4);
-            add(woman2);
             add(woman3);
+            add(woman2);
             add(woman1);
         }});
 

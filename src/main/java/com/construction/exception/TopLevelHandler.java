@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -91,17 +90,5 @@ public class TopLevelHandler extends ResponseEntityExceptionHandler {
 
 		return handleExceptionInternal(ex, error, headers,
 				HttpStatus.NOT_FOUND, request);
-	}
-
-	@ExceptionHandler({AccessDeniedException.class})
-	public ResponseEntity accessDeniedException(AccessDeniedException ex,
-															  WebRequest request) {
-		ErrorResource error = new ErrorResource();
-		error.setMessage(ex.getMessage());
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		return handleExceptionInternal(ex, error, headers,
-				HttpStatus.FORBIDDEN, request);
 	}
 }
