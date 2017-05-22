@@ -30,18 +30,38 @@ public class MatchingLogic {
             UUID woman = getHighestRankedNotProposed(man, proposals);
             Optional<Map.Entry<UUID, UUID>> match = menToWomenMatching.entrySet().stream().filter(e -> e.getValue().equals(woman)).findAny();
             if(match.isPresent()) {
-
+                //Does she prefer current match or switch?
+                UUID matchedMan = match.get().getKey();
+                ParticipantDto womanDto = women.stream().filter(w -> w.getId().equals(woman)).findFirst().get();
+                List<UUID> orderedMen = womanDto.getPreferences().stream().map(x -> x.getId()).collect(Collectors.toList());
+                int currentMatchRank = orderedMen.indexOf(matchedMan);
+                int potentialMatchRank = orderedMen.indexOf(man);
+                if(potentialMatchRank < currentMatchRank) {
+                    menToWomenMatching.remove(matchedMan);
+                    addRemainingMan(matchedMan, remainingMen, men);
+                    menToWomenMatching.put(man, woman);
+                    removeRemainingMan(man, remainingMen, men);
+                }
             } else {
                 //Shes free
                 menToWomenMatching.put(man, woman);
-                addProposal(man, woman, proposals);
+                removeRemainingMan(man, remainingMen, men);
             }
+            addProposal(man, woman, proposals);
         }
 
     }
 
+    private void removeRemainingMan(UUID man, List<UUID> remainingMen, List<ParticipantDto> men) {
+
+    }
+
+    private void addRemainingMan(UUID matchedMan, List<UUID> remainingMen, List<ParticipantDto> men) {
+
+    }
+
     private void addProposal(UUID man, UUID woman, Map<UUID, List<UUID>> proposals) {
-        
+
     }
 
     private UUID getHighestRankedNotProposed(UUID man, Map<UUID, List<UUID>> proposals) {
